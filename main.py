@@ -1,3 +1,4 @@
+import sys
 from stats import *
 
 def get_book_text(fpath):
@@ -18,7 +19,10 @@ def print_report(num_words, num_chars_sorted, path):
     print("============= END ===============")
 
 def main():
-    path = "books/frankenstein.txt"
+    if len(sys.argv) <= 1:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    path = f"{sys.argv[1]}"
     file_contents = get_book_text(path)
     num_words = get_word_count(file_contents)
     num_chars = get_char_count(file_contents)
