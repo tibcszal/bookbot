@@ -5,14 +5,25 @@ def get_book_text(fpath):
         return f.read()
 
 
+def print_report(num_words, num_chars_sorted, path):
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {path}...")    
+    print("----------- Word Count ----------")
+    print(f"Found {num_words} total words")
+    print("--------- Character Count -------")
+    for entry in num_chars_sorted:
+        if not entry['char'].isalpha():
+            continue
+        print(f"{entry['char']}: {entry['count']}")
+    print("============= END ===============")
+
 def main():
     path = "books/frankenstein.txt"
     file_contents = get_book_text(path)
     num_words = get_word_count(file_contents)
     num_chars = get_char_count(file_contents)
-    print(f"{num_words} words found in the document")
-    print(num_chars)
-    
+    num_chars_sorted = build_sorted_list(num_chars)
+    print_report(num_words, num_chars_sorted, path)
 
 if __name__ == "__main__":
     main()
